@@ -32,7 +32,7 @@ fun MainScreenView(
         }
         Button(
             onClick = {
-
+                navController.navigate(ScreenViewNav.ListScreenView)
             },
             modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
         ) {

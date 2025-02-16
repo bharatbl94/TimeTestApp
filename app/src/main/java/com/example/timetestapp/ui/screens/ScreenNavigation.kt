@@ -1,10 +1,12 @@
 package com.example.timetestapp.ui.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.timetestapp.utils.LruCache
 import com.example.timetestapp.utils.ScreenViewNav
 import com.example.timetestapp.viewmodels.GenerateViewModel
 
@@ -12,7 +14,8 @@ import com.example.timetestapp.viewmodels.GenerateViewModel
 @Composable
 fun ScreenNavigation(
     navController: NavHostController,
-    generateViewModel: GenerateViewModel = viewModel()
+    generateViewModel: GenerateViewModel = viewModel(),
+    imageCacheUtil: LruCache
 ) {
     NavHost(navController = navController, startDestination = ScreenViewNav.MainScreenView) {
         composable(ScreenViewNav.MainScreenView) {
@@ -23,15 +26,18 @@ fun ScreenNavigation(
         ) { _ ->
             GenerateDogScreen(
                 viewModel = generateViewModel,
-                navController
+                navController,
+                imageCacheUtil
             )
         }
         composable(
             route = ScreenViewNav.ListScreenView,
         ) { _ ->
-            GenerateDogScreen(
+
+            ImageCacheScreen(
                 viewModel = generateViewModel,
-                navController = navController
+                navController = navController,
+                imageCacheUtil = imageCacheUtil,
             )
         }
     }

@@ -3,6 +3,8 @@ package com.example.timetestapp.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Base64
+import java.nio.charset.StandardCharsets
 
 
 object Utils {
@@ -26,6 +28,15 @@ object Utils {
             else -> false
         }
         return result
+    }
+
+
+    fun String.encodeToBase64(): String {
+        return Base64.encodeToString(this.toByteArray(), Base64.DEFAULT).toString()
+    }
+
+    fun String.decodeFromBase64(): String {
+        return String(Base64.decode(this, Base64.DEFAULT), StandardCharsets.UTF_8)
     }
 }
 object ScreenViewNav {
